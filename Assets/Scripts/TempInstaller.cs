@@ -26,7 +26,9 @@ public class TempInstaller : MonoInstaller
     void BindMono()
     {
         Container.Bind<Engine>().FromInstance(new Engine());
-        Container.Bind<SpinnerService>().FromInstance(new SpinnerService());
+        //Container.Bind<SpinnerService>().FromInstance(new SpinnerService());
+        Container.Bind<SpinnerService>().AsSingle();
+        Container.Bind<Spawner>().FromInstance(GameObject.Find("GameObject").GetComponent<Spawner>());
         Container.Bind<Notification>().FromInstance(GameObject.Find("GameObject").GetComponent<Notification>());
     }
 
@@ -40,7 +42,11 @@ public class TempInstaller : MonoInstaller
         SignalBusInstaller.Install(Container);
 
         Container.DeclareSignal<TestSignal>();
+        Container.DeclareSignal<SpeedSignal>();
         Container.BindSignal<TestSignal>().ToMethod<SpinnerService>(x => x.UpdateRotationSpeed).FromResolve();
+        Container.BindSignal<SpeedSignal>().ToMethod<Spawner>(x=>x.UpdateTheSpeed).FromResolve();
+        //Container.BindSignal<SpeedSignal>().ToMethod<CubePrefab>(x => x.SetSpeed).FromResolve();
+        //Container.BindSignal<SpeedSignal>().ToMethod<CubePrefab>((Factory, x) => Factory.SetSpeed).FromResolve();
         //Container.BindSignal<TestSignal>().ToMethod(() => Debug.Log("  ----->>  Received TestSignal signal"));
     }
 

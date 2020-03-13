@@ -39,6 +39,7 @@ public class CubePrefab : MonoBehaviour
 
     public void SetSpeed(int newSpeed)
     {
+       
         if (newSpeed < 10)
         {
             newSpeed = 10;

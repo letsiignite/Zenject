@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Zenject;
 
-public class SpinnerService 
+public class SpinnerService : IInitializable
 {
     const int minSpeed = 10;
     const int maxSpeed = 200;
@@ -14,6 +14,18 @@ public class SpinnerService
     GameObject RotatingCube;
     bool speeding = true;
     int currentSpeed = 0;
+
+    SignalBus signalBus;
+
+    public SpinnerService(SignalBus signal)
+    {
+        signalBus = signal;
+    }
+
+    public void Initialize()
+    {
+        throw new NotImplementedException();
+    }
 
     public void UpdateRotationSpeed(TestSignal test)
     {
@@ -32,7 +44,7 @@ public class SpinnerService
         }
 
         currentSpeed = (speeding == true)?(currentSpeed += speedFactor) : (currentSpeed -= speedFactor);
-        
-        test.CubeToRotate.GetComponent<CubePrefab>().SetSpeed(currentSpeed);
+        signalBus.Fire(new SpeedSignal() { newSpeedValue = currentSpeed});
+        //test.CubeToRotate.GetComponent<CubePrefab>().SetSpeed(currentSpeed);
     }
 }
