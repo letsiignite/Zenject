@@ -30,6 +30,7 @@ public class TempInstaller : MonoInstaller
         Container.Bind<SpinnerService>().AsSingle();
         Container.Bind<Spawner>().FromInstance(GameObject.Find("GameObject").GetComponent<Spawner>());
         Container.Bind<Notification>().FromInstance(GameObject.Find("GameObject").GetComponent<Notification>());
+        
     }
 
     void BindFactory()
@@ -44,9 +45,12 @@ public class TempInstaller : MonoInstaller
         Container.DeclareSignal<TestSignal>();
         Container.DeclareSignal<SpeedSignal>();
         Container.BindSignal<TestSignal>().ToMethod<SpinnerService>(x => x.UpdateRotationSpeed).FromResolve();
-        Container.BindSignal<SpeedSignal>().ToMethod<Spawner>(x=>x.UpdateTheSpeed).FromResolve();
+        //Container.BindSignal<SpeedSignal>().ToMethod<Spawner>(x=>x.UpdateTheSpeed).FromResolve();
         //Container.BindSignal<SpeedSignal>().ToMethod<CubePrefab>(x => x.SetSpeed).FromResolve();
-        //Container.BindSignal<SpeedSignal>().ToMethod<CubePrefab>((Factory, x) => Factory.SetSpeed).FromResolve();
+
+        //Container.BindSignal<SpeedSignal>().ToMethod<CubePrefab>((Factory, x) => Factory.SetSpeed(x)).FromResolve();
+        //                                                                      Trying to find a way to bind  CubePrefab from the spawned instance of prefab.
+
         //Container.BindSignal<TestSignal>().ToMethod(() => Debug.Log("  ----->>  Received TestSignal signal"));
     }
 

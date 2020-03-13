@@ -37,9 +37,9 @@ public class CubePrefab : MonoBehaviour
         //Debug.Log("Fired signal");
     }
 
-    public void SetSpeed(int newSpeed)
+    public void SetSpeed(SpeedSignal speedSignal ) // update rotation speed accordingly
     {
-       
+        int newSpeed = speedSignal.newSpeedValue;
         if (newSpeed < 10)
         {
             newSpeed = 10;

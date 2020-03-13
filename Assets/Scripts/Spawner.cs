@@ -37,6 +37,6 @@ public class Spawner : MonoBehaviour
     public void UpdateTheSpeed(SpeedSignal signal)
     {
         Debug.Log("  +++  UpdateTheSpeed  +++");
-        cubePrefabObj.SetSpeed(signal.newSpeedValue);
+        //cubePrefabObj.SetSpeed(signal.newSpeedValue);
     }
 }

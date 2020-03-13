@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Zenject;
 
-public class SpinnerService : IInitializable
+public class SpinnerService : IInitializable    // what is the need of using it. We should use it when we want something to happen on start().
 {
     const int minSpeed = 10;
     const int maxSpeed = 200;
@@ -24,7 +24,7 @@ public class SpinnerService : IInitializable
 
     public void Initialize()
     {
-        throw new NotImplementedException();
+       //                                                               I have nothing to initialize here, so left it empty
     }
 
     public void UpdateRotationSpeed(TestSignal test)
@@ -44,7 +44,7 @@ public class SpinnerService : IInitializable
         }
 
         currentSpeed = (speeding == true)?(currentSpeed += speedFactor) : (currentSpeed -= speedFactor);
-        signalBus.Fire(new SpeedSignal() { newSpeedValue = currentSpeed});
+        signalBus.Fire(new SpeedSignal() { newSpeedValue = currentSpeed});  // fire as signal to update the rotation speed.
         //test.CubeToRotate.GetComponent<CubePrefab>().SetSpeed(currentSpeed);
     }
 }
