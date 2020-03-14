@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class CubePrefab : MonoBehaviour
+public class CubePrefab : MonoBehaviour, IInitializable, IDisposable
 {
     Notification notificationObj;
     int rotationSpeed = 10;
@@ -15,12 +16,26 @@ public class CubePrefab : MonoBehaviour
         notificationObj = obj;
         signalBus = signal;
     }
+
+    public void Initialize()
+    {
+        Debug.Log("     MonoBehaviour, IInitializable, IDisposable");
+        signalBus.Subscribe<SpeedSignal>(SetSpeed);
+    }
+
+    public void Dispose()
+    {
+        signalBus.Unsubscribe<SpeedSignal>(SetSpeed);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //Debug.Log(gameObject .name+" -  Created -  "+Time.time);
         notificationObj.notify("Cube created at -  "+Time.time);
         rotation = new Vector3(0, rotationSpeed * Time.deltaTime, 0);
+        Debug.Log("   START------>  MonoBehaviour, IInitializable, IDisposable");
+        signalBus.Subscribe<SpeedSignal>(SetSpeed);
     }
 
     // Update is called once per frame
@@ -61,5 +76,7 @@ public class CubePrefab : MonoBehaviour
  * cube shoud send a signal onclick.
  * Signal checks speed, if more than 100 -reduce or less than 10 to speed up
  * Service sends signal to rotate speed.
- * 
+ * scene manager to spawn cubes,
+ * have name spaces
+ * script folder with namespace name
  * */

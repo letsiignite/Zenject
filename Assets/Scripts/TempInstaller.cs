@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -6,7 +7,11 @@ using Zenject;
 public class TempInstaller : MonoInstaller
 {
     public GameObject cubePrefab;
-   
+
+
+    
+
+
     public override void InstallBindings()
     {
         // base.InstallBindings();
@@ -21,6 +26,7 @@ public class TempInstaller : MonoInstaller
     {
         Container.Bind<IGamingKeys>().To<PlayerMovement>().AsSingle();
         Container.Bind<IGamingKeys>().WithId("car").To<CarMovement>().AsSingle();
+        Container.BindInterfacesTo<SceneManagerScript>().AsSingle();
     }
 
     void BindMono()
@@ -54,4 +60,5 @@ public class TempInstaller : MonoInstaller
         //Container.BindSignal<TestSignal>().ToMethod(() => Debug.Log("  ----->>  Received TestSignal signal"));
     }
 
+    
 }
