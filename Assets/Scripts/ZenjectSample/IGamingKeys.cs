@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGamingKeys 
+namespace ZenjectSample
 {
-    void HandleW();
-    void HandleA();
-    void HandleS();
-    void HandleD();
+    public interface IGamingKeys
+    {
+        void HandleW();
+        void HandleA();
+        void HandleS();
+        void HandleD();
+    }
 }

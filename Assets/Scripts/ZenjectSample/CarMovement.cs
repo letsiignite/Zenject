@@ -1,28 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CarMovement : IGamingKeys
+namespace ZenjectSample
 {
-    public void HandleA()
+    public class CarMovement : IGamingKeys
     {
-        Debug.Log("Moving car Left");
-    }
+        public void HandleA()
+        {
+            Debug.Log("Moving car Left");
+        }
 
-    public void HandleD()
-    {
-        Debug.Log("Moving car Right");
-    }
+        public void HandleD()
+        {
+            Debug.Log("Moving car Right");
+        }
 
-    public void HandleS()
-    {
-        Debug.Log("Moving car Back");
-    }
+        public void HandleS()
+        {
+            Debug.Log("Moving car Back");
+        }
 
-    public void HandleW()
-    {
-        Debug.Log("Moving car Forword");
-    }
+        public void HandleW()
+        {
+            Debug.Log("Moving car Forword");
+        }
 
-   
+
+    }
 }

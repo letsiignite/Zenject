@@ -2,48 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-
-public class PlayerInput : MonoBehaviour
+namespace ZenjectSample
 {
-    [Inject]
-    IGamingKeys InputForPlayer;
-    [Inject(Id ="car")]
-    IGamingKeys InputForCar;
-
-    Engine engineObj;
-
-    /* public void PlayerInputOne(IGamingKeys plr, IGamingKeysCar car)
-     {
-         InputForPlayer = plr;
-         InputForCar = car;
-         Debug.Log("Injection complete");
-     }*/
-    // Start is called before the first frame update
-    [Inject]
-    public void Construct(Engine obj)
+    public class PlayerInput : MonoBehaviour
     {
-        engineObj = obj;
-    }
+        [Inject]
+        IGamingKeys InputForPlayer;
+        [Inject(Id = "car")]
+        IGamingKeys InputForCar;
 
-    void Start()
-    {
-        engineObj.StartEngine();
-        Debug.Log("  --> State = "+engineObj.state);
-    }
+        Engine engineObj;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
+        /* public void PlayerInputOne(IGamingKeys plr, IGamingKeysCar car)
+         {
+             InputForPlayer = plr;
+             InputForCar = car;
+             Debug.Log("Injection complete");
+         }*/
+        // Start is called before the first frame update
+        [Inject]
+        public void Construct(Engine obj)
         {
-            InputForCar.HandleA();
-            InputForPlayer.HandleA();
+            engineObj = obj;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        void Start()
         {
-            InputForPlayer.HandleD();
-            InputForCar.HandleD();
+            engineObj.StartEngine();
+            Debug.Log("  --> State = " + engineObj.state);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                InputForCar.HandleA();
+                InputForPlayer.HandleA();
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                InputForPlayer.HandleD();
+                InputForCar.HandleD();
+            }
         }
     }
 }
