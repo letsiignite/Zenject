@@ -6,17 +6,7 @@ using UnityEngine.UI;
 public class Notification : MonoBehaviour
 {
     public Text notificationText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
     public void notify(string msg)
     {
